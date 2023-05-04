@@ -1,3 +1,13 @@
+/* navbar */
+
+#navbar {
+    background-color: #FAF4F4!important;
+    box-shadow: -3px -3px 9px #aaa9a9a2, 3px 3px 7px rgb(147 149 151 / 30%);
+
+}
+a.nav-link{
+    color:#008993 ;
+}
 body{
-    background-color: #008993;
+    background-color: #81cdc6;
 }

@@ -14,8 +14,8 @@ body{
 }
 
 h1 {
-    width: 50%;
-    COLOR: #008993;
+
+    color: #008993;
     margin-top: 10%;
     font-size: 70px;
     text-align: left;
@@ -24,6 +24,14 @@ h1 {
 img {
     float: right;
 }
-#banner{
-    
+.first-section {
+    display: flex;
+}
+.left {
+    display: inline-block;
+    width: 49%;
+}
+.right {
+    display: inline-block;
+    width: 49%;
 }

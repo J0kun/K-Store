@@ -10,5 +10,20 @@ a.nav-link{
 }
 
 body{
-    background-color: #81cdc6;
+    background-color: #FAF4F4;
+}
+
+h1 {
+    width: 50%;
+    COLOR: #008993;
+    margin-top: 10%;
+    font-size: 70px;
+    text-align: left;
+    padding: 5%;
+}
+img {
+    float: right;
+}
+#banner{
+    
 }

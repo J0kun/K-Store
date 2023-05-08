@@ -10,7 +10,8 @@ session_start();
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://kit.fontawesome.com/50fcaa8399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="CSS/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -24,108 +25,41 @@ session_start();
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="Images/logo.jpeg" alt="logo" width="100" height="100">
-      </a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-          <li class="nav-item"><a class="nav-link fs-5" href="index.php">Home</a></li>
-          <li class="nav-item"><a class="nav-link fs-5" href="About.php">Products</a></li>
-          <li class="nav-item"><a class="nav-link fs-5" href="News.php">News</a></li>
-          <li class="nav-item"><a class="nav-link fs-5" href="Contact-Us.php">Contact Us</a></li>
-          <li class="nav-item"><a class="nav-link fs-5" href="Contact-Us.php">About Us</a></li>
-          <li class="nav-item"><a class="nav-link fs-5" id="login" href="Login-Signup.php">Login</a></li>
-
-
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-  <a class="navbar-brand"><img class="logo" src="images/logo.png" height="80px" width="80px" alt="logo"></a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-
-    <ul class="navbar-nav mx-auto">
-
+<nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="#">
+      <img src="Images/logo.jpeg" alt="logo" width="100" height="100">
+    </a>    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
       <li class="nav-item"><a class="nav-link fs-5" href="index.php">Home</a></li>
-      <li class="nav-item"><a class="nav-link fs-5" href="About.php">About</a></li>
-      <li class="nav-item"><a class="nav-link fs-5" href="News.php">News</a></li>
-      <li class="nav-item"><a class="nav-link fs-5" href="Contact-Us.php">Contact Us</a></li>
-
-
-      <li class="nav-item"><a class="nav-link fs-5" id="login" href="Login-Signup.php">Login</a></li>
-      <?php
-
-      if (!empty($_SESSION['firstname'])) {
-        if ($_SESSION['type'] == 1) {
-      ?>
-          <li class="dropdown-center nav-item">
-            <a class=" dropdown-toggle nav-link fs-5" data-bs-toggle="dropdown" aria-expanded="false">
-              Manage
-            </a>
-            <ul class="dropdown-menu">
-              <a class="nav-link fs-5" href="admin/ManageNews.php">News</a>
+        <li class="nav-item"><a class="nav-link fs-5" href="About.php">Products</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" href="News.php">News</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" href="Contact-Us.php">Contact Us</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" href="Contact-Us.php">About Us</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" id="login" href="Login-Signup.php">Login</a></li>
+        <li class="dropdown-center nav-item">
+          <a class=" dropdown-toggle nav-link fs-5" data-bs-toggle="dropdown" aria-expanded="false">
+            Manage
+          </a>
+          <ul class="dropdown-menu">
+              <a class="nav-link fs-5" href="ManageProducts.php">News</a>
               <a class="nav-link fs-5" href="admin/ManageUsers.php">Users</a>
-            </ul>
-          </li>
-        <?php
-        }
-        ?>
+          </ul>
+      </li>
 
-
-      <?php
-      }
-      ?>
-
-
-
-    </ul>
-
-
-    <div class="account">
-      <h1 class="username fs-6 text-end "><?php
-                                          if (!empty($_SESSION['firstname'])) {
-
-                                            $FN = $_SESSION['firstname'];
-                                            $LN = $_SESSION['lastname'];
-                                            echo  ucwords($FN) . " " . ucwords($LN);
-                                          } else {
-                                          }
-
-                                          ?></h1>
-      <?php
-      if (!empty($_SESSION['firstname'])) {
-      ?>
-        <a class="logout" onclick="myFunction()">Log out</a>
-        <script>
-          function myFunction() {
-            var logout = confirm("Are you sure you want to LOG OUT ?");
-
-            if (logout) {
-              location.href = "admin/Logout.php";
-            }
-          }
-        </script>
-      <?php
-      } else {
-      }
-
-      ?>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
-
   </div>
-  </nav>
+</nav>
 
 
 
@@ -194,10 +128,10 @@ window.location.href='Login-Signup.php';
 
   <body>
 
-    <div class="container" id="logincontainer">
+    <div class="big_container" id="logincontainer">
       <div class="form-container sign-up-container">
 
-        <form action="Login-Signup.php" id="form" method="post">
+        <form action="Login-Signup.php" class="signup_form" method="post">
           <h1 class="signup-h1">Create Account</h1>
 
           <input type="text" class="login-input" name="firstname" placeholder="FirstName" value="<?php if (isset($_POST['firstname'])) {
@@ -227,7 +161,7 @@ window.location.href='Login-Signup.php';
         </form>
       </div>
       <div class="form-container sign-in-container">
-        <form action="Login-Signup.php" method="post">
+        <form action="Login-Signup.php" method="post" class="signin_form">
           <h1 class="login-h1">Sign In</h1>
           <input type="email" class="login-input" name="email" placeholder="Email">
           <input type="password" class="login-input" name="password" placeholder="Password">

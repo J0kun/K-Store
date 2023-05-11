@@ -8,7 +8,7 @@ if(!isset($_SESSION['email'])){
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="CSS/styles.css">
     <link
             href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat&family=Sacramento&display=swap"
             rel="stylesheet">
@@ -35,77 +35,38 @@ if(!isset($_SESSION['email'])){
         <title>Login</title>
 	</head>
 <body>
-<nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand"><img class="logo" src="../images/logo.png" height="80px" width="80px" alt="logo"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="#">
+      <img src="Images/logo.jpeg" alt="logo" width="100" height="100">
+    </a>    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      
-    <ul class="navbar-nav mx-auto">
-    
-        <li class="nav-item"><a class="nav-link fs-5" href="../index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link fs-5" href="../About.php">About</a></li>
-        <li class="nav-item"><a class="nav-link fs-5" href="../News.php">News</a></li>
-        <li class="nav-item"><a class="nav-link fs-5" href="../Contact-Us.php">Contact Us</a></li>
-        <li class="nav-item"><a class="nav-link fs-5" id="login" href="../Login-Signup.php">Login</a></li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+      <li class="nav-item"><a class="nav-link fs-5" href="index.php">Home</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" href="All_products.php?id=<?php echo md5(0) ?>">Products</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" href="News.php">News</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" href="Contact-Us.php">Contact Us</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" href="About.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" id="login" href="Login-Signup.php">Login</a></li>
+        <li class="dropdown-center nav-item">
+          <a class=" dropdown-toggle nav-link fs-5" data-bs-toggle="dropdown" aria-expanded="false">
+            Manage
+          </a>
+          <ul class="dropdown-menu">
+              <a class="nav-link fs-5" href="ManageProducts.php">News</a>
+              <a class="nav-link fs-5" href="ManageUsers.php">Users</a>
+          </ul>
+      </li>
 
-        <?php
-        if(!empty($_SESSION['firstname'])){
-            if($_SESSION['type']==1){
-                ?>
-                <li class="dropdown-center nav-item">
-                <a class=" dropdown-toggle nav-link fs-5" data-bs-toggle="dropdown" aria-expanded="false">
-                  Manage
-                </a>
-                <ul class="dropdown-menu">
-                    <a class="nav-link fs-5" href="ManageNews.php">News</a>
-                    <a class="nav-link fs-5" href="ManageUsers.php">Users</a>
-                </ul>
-            </li>
-            <?php
-            }
-            ?>
-           
-
-       <?php
-        }
-         ?>
-       
-    </ul>
-    <div class="account">
-    <h1 class="username fs-6 text-end "><?php
-        if(empty($_SESSION['firstname']))
-        {
-          
-        }
-        else{
-          $FN= $_SESSION['firstname']; $LN=$_SESSION['lastname']; echo $FN." ".$LN;         
-         
-        }
-         
-         ?></h1>
-<?php
-         if(empty($_SESSION))
-         {
-
-         }
-         else{
-          ?>
-          <a class="logout" onclick="myFunction()">Log out</a>
-          <script>
-function myFunction() {
-  var logout = confirm("Are you sure you want to LOG OUT ?");
-
-if(logout){
-     location.href = "Logout.php";
-}
-}
-</script>
-          <?php
-         }
-         
-?>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
   </div>
 </nav>
@@ -113,7 +74,7 @@ if(logout){
 
 
 <?php
-include_once('../DB.php');
+include_once('DB.php');
 $table = 'users';
     
 if (isset($_GET['page_no']) && $_GET['page_no']!="") {
@@ -251,26 +212,22 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 <div class="table-responsive-sm">
 <button type="button" class="btn btn-primary adduser" data-bs-toggle="modal" data-bs-target="#form_modal" data-bs-whatever="@mdo">Add User</button>
 
-<table class='ManageUsers' id='mytable'>
+<table class='ManageTable' id='mytable'>
 <thead>
     <tr>
     <th>No</th>
         <th>ID.</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Job Place</th>
-        <th>Experience</th>
-        <th>Degree</th>
         <th>Email</th>
         <th>Type</th>
         <th>Action</th>
-
     </tr>
 </thead>
 <tbody>
 
 				<?php
-					require '../DB.php';
+					require 'DB.php';
           $i=1;
           
 					$query = mysqli_query($connect, "SELECT * FROM `users`") or die(mysqli_error());
@@ -287,16 +244,14 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 					<td><?php echo $fetch['ID']?></td>
 					<td><?php echo $fetch['FIRSTNAME']?></td>
           <td><?php echo $fetch['LASTNAME']?></td>
-          <td><?php echo $fetch['JOBPLACE']?></td>
-          <td><?php echo $fetch['EXPERIENCE']?></td>
-          <td><?php echo $fetch['DEGREE']?></td>
           <td><?php echo $fetch['EMAIL']?></td>
           <td><?php echo $fetch['TYPE']?></td>
           <td><button type="button" class="btn btn-warning action" data-bs-toggle="modal" data-bs-target="#edit<?php echo $fetch['ID']?>" data-bs-whatever="@mdo"><span class="glyphicon glyphicon-edit"></span>Update</button>
           <button type="button" class="btn btn-danger action" data-bs-toggle="modal" data-bs-target="#delete<?php echo $fetch['ID']?>" data-bs-whatever="@mdo"><span class="glyphicon glyphicon-edit"></span>Delete</button></td>
-         
+        
+
+
           <div class="modal fade" id="delete<?php echo $fetch['ID']?>" aria-hidden="true">
-	
           <div class="modal-dialog">
 		<div class="modal-content">
 			<form method="POST" id="updatenews" enctype="multipart/form-data" action="delete.php">
@@ -315,18 +270,7 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 							<label>Last Name</label>
 							<input type="text" class="form-control managenewsupdate" name="lastname" value="<?php echo $fetch['LASTNAME']?>" />
 						</div>
-            <div class="form-group">
-							<label>Job Place</label>
-							<input type="text" class="form-control managenewsupdate" name="jobplace" value="<?php echo $fetch['JOBPLACE']?>" />
-						</div>
-            <div class="form-group">
-							<label>Experience</label>
-							<input type="text" class="form-control managenewsupdate" name="experience" value="<?php echo $fetch['EXPERIENCE']?>" />
-						</div>
-            <div class="form-group">
-							<label>Degree</label>
-							<input type="text" class="form-control managenewsupdate" name="degree" value="<?php echo $fetch['DEGREE']?>" />
-						</div>
+          
             <div class="form-group">
 							<label>Email</label>
 							<input type="text" class="form-control managenewsupdate" name="email" value="<?php echo $fetch['EMAIL']?>" />
@@ -352,6 +296,8 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 	</div>
 </div>			
           
+
+
 <div class="modal fade" id="edit<?php echo $fetch['ID']?>" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -370,18 +316,6 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
             <div class="form-group">
 							<label>Last Name</label>
 							<input type="text" class="form-control managenewsupdate" name="lastname" value="<?php echo $fetch['LASTNAME']?>" />
-						</div>
-            <div class="form-group">
-							<label>Job Place</label>
-							<input type="text" class="form-control managenewsupdate" name="jobplace" value="<?php echo $fetch['JOBPLACE']?>" />
-						</div>
-            <div class="form-group">
-							<label>Experience</label>
-							<input type="text" class="form-control managenewsupdate" name="experience" value="<?php echo $fetch['EXPERIENCE']?>" />
-						</div>
-            <div class="form-group">
-							<label>Degree</label>
-							<input type="text" class="form-control managenewsupdate" name="degree" value="<?php echo $fetch['DEGREE']?>" />
 						</div>
             <div class="form-group">
 							<label>Email</label>
@@ -437,18 +371,6 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 							<label>Last Name</label>
 							<input type="text" class="form-control managenewsadd" name="lastname" required="required"/>
 						</div>
-						<div class="form-group">
-							<label>Job Place</label>
-							<input type="text" class="form-control managenewsadd" name="jobplace" required="required"/>
-						</div>
-            <div class="form-group">
-							<label>Experience</label>
-							<input type="number" class="form-control managenewsadd" name="experience" required="required"/>
-            </div>
-            <div class="form-group">
-							<label>Degree</label>
-							<input type="text" class="form-control managenewsadd" name="degree" required="required"/>
-            </div>
             <div class="form-group">
 							<label>Email</label>
 							<input type="email" class="form-control managenewsadd" name="email" required="required"/>
@@ -481,80 +403,122 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 </div>    
 
         </div>
-<footer>
+        <footer class="text-center text-lg-start bg-light text-muted">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <!-- Left -->
+    
+    <!-- Left -->
 
+    <!-- Right -->
+    <div>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
 
-
-
-
-
-      <div class="footer_container">
-      <div class="row">
-      <div class="col-4 " id="links">
-       
-        <div class="contact-div">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-          </svg>
-          <h2 class="location fs-5">Zubairi.St, Sana'a, Yemen</h2>
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>Company name
+          </h6>
+          <p>
+            Here you can use rows and columns to organize your footer content. Lorem ipsum
+            dolor sit amet, consectetur adipisicing elit.
+          </p>
         </div>
-        <div class="contact-div" >
-      
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-          </svg>
-       
-          <a class="phone text-decoration-none" href="tel:00967772379364">00967772379364</a>
-      </div>
-      
-       <div class="contact-div" > 
-         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-          </svg>
-          <p class="email"><a class="text-decoration-none" href="mailto:yemenipsychiatric@gmail.com">yemenipsychiatric@gmail.com</a></p>
-       
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Products
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Angular</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">React</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Vue</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Laravel</a>
+          </p>
         </div>
-      </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
       
-      
-      
-      <div class="col-4">
-        <h1 class="fs-4 text-start">OVERVIEW</h1>
-        <div class="footer_links">
-         
-          <ul>
-            
-             <li ><a class="list-group-item text-start" href="../index.php">Home</a> </li>
-             <li ><a class="list-group-item text-start" href="../About.php">About</a> </li>
-             <li ><a class="list-group-item text-start" href="../News.php">News</a> </li>
-                <li><a class="list-group-item text-start" href="../Contact-Us.php">Contact Us</a> </li>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i> Makah Mall, Sana'a, Yemen</p>
+          <p class="email"><a class="text-decoration-none" href="mailto:koreanstore2022@gmail.com">koreanstore2022@gmail.com</a></p>
+          <a class="phone text-decoration-none" href="tel:00967779977171">00967779977171</a>
+        </div>
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <h5 class="mb-1" style="letter-spacing: 2px; color: #818963;">opening hours</h5>
+          <table class="table" style="color: #4f4f4f; border-color: #666;">
+            <tbody>
+              <tr>
                 
-             </ul>
+                <td>Mon - Fri:</td>
+                <td>8am - 9pm</td>
+              </tr>
+              <tr>
+                <td>Sat - Sun:</td>
+                <td>8am - 1am</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        
       </div>
-      
-     
-        <div class="col-4">
-        <h1 class="fs-4 text-start">MY ACCOUNT</h1>
-        <ul>
-          <li><a class="list-group-item text-start" href="">My Account</a></li>
-          <li><a href="../Login-Signup.php" class="list-group-item text-start">Login/Register</a></li>
-        </ul>
+    </div>
       </div>
-      
-      </div>
-      
-      
-      </div>  
-      
-      <div class="copyright">
-      
-      <em>YagoTech &copy;<?php echo date("Y") ?> All Rights Reserved</em> 
-      </div> 
-      
-      </footer>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+            <div class="copyright">
+
+                <em>YagoTech &copy;<?php echo date("Y") ?> All Rights Reserved</em>
+            </div>
+  <!-- Copyright -->
+</footer>
 
 
 

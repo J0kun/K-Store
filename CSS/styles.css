@@ -10,27 +10,32 @@ a.nav-link{
 }
 
 body{
-background-color: #FAF4F4;
+    background-color: white;
 }
-
 .first_container_heading {
     color: #008993;
-    margin-top: 10%;
+    margin: 20% 10%;
     font-size: 70px;
     text-align: left;
-    padding: 5%;
 }
-
+    
 .first-container {
+    height: 80vh;
     display: flex;
 }
 .left {
+    height: 65vh;
+    position: absolute;
     display: inline-block;
-    width: 49%;
+    width: 50%;
 }
 .right {
     display: inline-block;
-    width: 49%;
+   
+    width: 50%;
+}
+img#banner {
+    width: 100%;
 }
 .second_container .container .row .col img{
     margin: 0 auto;
@@ -42,7 +47,7 @@ width: 200px;
     box-shadow: -3px -3px 9px #aaa9a9a2, 3px 3px 7px rgb(147 149 151 / 30%);
 
     }
-    .card div img{
+    .card_image{
         width: 100%;
         height: 300px;
     }
@@ -62,8 +67,7 @@ width: 200px;
         background-color: #008993;
         color: #FAF4F4;
     }
-    .second_container{
-        margin: 7% 0;
+    .second_container {
         padding: 7%;
         background-color: #73DDC2;
     }
@@ -91,6 +95,88 @@ transition-delay: 0.7s;
 .reveal_four{
     transition-delay: 0.8s;
 }
+
+img.card_company {
+    display: block;
+    height: 80px;
+    width: 50%;
+    margin: 0 auto;
+}
+p.card_paragraph {
+    text-align: center;
+}
+img.brands {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    height: 70px;
+}
+.third_container.row {
+    padding: 10% 15%;
+    background-color: #FAF4F4;
+}
+.third_container h2{
+    text-align: center;
+}
+.card-header{
+    background-color: white;
+}
+hr{
+    width: 4%;
+    border: 6px dotted #EAF6F6;
+    border-bottom: none;
+    margin: 100px auto;
+}
+.fourth_container{
+    background-color: white;
+}
+.fourth_container h2{
+color: #73DDC2;
+text-align: center;
+display: block;
+}
+
+.rec_cat {
+    
+    width: 150px;
+
+}
+.rec_cat img{
+    width: 150px;
+    border-radius: 200px;
+    background-color: #faf0e6;
+}
+.rec_cat span{
+    
+        text-align: center;
+        display: block;
+        color: black;
+    
+}
+.recommendations{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+/* about us */
+
+.About_first img{
+   width: 100%;
+   height: 300px;
+}
+
+.About_first h1 {
+    top: 35%;
+    display: block;
+    position: absolute;
+    margin: 0 auto;
+    width: 15%;
+    color: #008993;
+    left: 45%;
+}
+
+
     /* login page */
     signup-h1,login-h1,hello,welcome-back
     {
@@ -326,13 +412,12 @@ transition-delay: 0.7s;
     }
 
     /* manage products */
-
     
-.ManageNews {
+.ManageTable {
     margin-bottom: 15%;
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: max-content;
+    width: 100%;
 }
 .form-group {
     margin-bottom: 10%;
@@ -371,36 +456,34 @@ button.addnews {
     margin: 2% auto;
     width: 10%;
 }
-/* td.pp {
-    overflow-wrap: anywhere;
-} */
+
 td.ll {
     overflow-wrap: anywhere;
     display: inline-block;
     width: 500px;
 }
-.ManageNews th {
+.ManageTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     background-color: #11698E;
     color: #73DDC2;
 }
-.ManageNews td,
-.ManageNews th {
+.ManageTable td,
+.ManageTable th {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
     font-family: 'Tajawal', sans-serif;
 }
 
-.ManageNews tbody:nth-child(odd),.ManageUsers tbody:nth-child(0dd) {
+.ManageTable tbody:nth-child(odd),.ManageUsers tbody:nth-child(0dd) {
     background-color: rgba(115, 221, 194,.25);
 }
 
-.ManageNews tr:hover {
+.ManageTable tr:hover {
     background-color: #ddd;
 }
-.ManageNews tr:nth-child(even) {
+.ManageTable tr:nth-child(even) {
     background-color: rgba(115, 221, 194,.25);
 
 }
@@ -437,6 +520,58 @@ button.btn.btn-primary {
     color: #f2f2f2;
     border-color: #11698e;
 }
+    /* products */
     
-    
-    
+
+    .products_row {
+        width: 100%;
+        /* display: flex; */
+        /* justify-content: space-between; */
+        padding: 5%;
+        /* flex-direction: row; */
+    }
+   
+    .single_container .products img{
+        border-radius: 10%;
+        margin-bottom: 5%;
+        width: 100%;
+    }
+    .single_container .products strong{
+        float: right;
+        font-size: 1.5vw;
+    }
+    .single_container .products h6{
+        width: fit-content;
+        padding: 1% 2%;
+        margin-bottom: 2%;
+        background-color: #73DDC2;
+        color: #FAF4F4;
+        border-radius: 10px;
+    }
+    .single_container {
+        display: flex;
+        border-radius: 20px;
+        background-color: white;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .products p{
+        color: #8f8f8f;
+    }
+    img.cosrx-cat-image{
+        padding-left: 5%;
+    }
+
+    img.farmstay-logo {
+        width: 30%;
+        padding-left: 5%;
+    }
+
+.p-3.products {
+    margin: 1% 2%;
+    display: inline-block;
+    width: 20%;
+    background-color: #fAf4f4;
+}

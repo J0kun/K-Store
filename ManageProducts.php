@@ -46,7 +46,7 @@ if(!isset($_SESSION['email'])){
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             
       <li class="nav-item"><a class="nav-link fs-5" href="index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link fs-5" href="About.php">Products</a></li>
+        <li class="nav-item"><a class="nav-link fs-5" href="Products.php">Products</a></li>
         <li class="nav-item"><a class="nav-link fs-5" href="News.php">News</a></li>
         <li class="nav-item"><a class="nav-link fs-5" href="Contact-Us.php">Contact Us</a></li>
         <li class="nav-item"><a class="nav-link fs-5" href="Contact-Us.php">About Us</a></li>
@@ -211,7 +211,7 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 <div class="table-responsive-sm">
 <button type="button" class="btn btn-primary addnews" data-bs-toggle="modal" data-bs-target="#form_modal" data-bs-whatever="@mdo">Add Product</button>
 
-<table class='ManageNews' id='mytable'>
+<table class='ManageTable' id='mytable'>
 <thead>
     <tr>
         <th>No</th>
@@ -225,6 +225,7 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
         <th>Price_Retail</th>
         <th>Price_WholeSale</th>
         <th>Units per Dozen</th>
+        <th>Type</th>
         <th>Action</th>
     </tr>
 </thead>
@@ -249,6 +250,8 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
           <td><?php echo $fetch['PRICE_RETAIL']?></td>	
           <td><?php echo $fetch['PRICE_WHOLESALE']?></td>	
           <td><?php echo $fetch['UNITS_PER_DOZEN']?></td>		
+          <td><?php echo $fetch['TYPE']?></td>		
+
           <td><button type="button" class="btn btn-warning actionnews" data-bs-toggle="modal" data-bs-target="#edit<?php echo $fetch['ID']?>" data-bs-whatever="@mdo"><span class="glyphicon glyphicon-edit"></span>Update</button>
           <button type="button" class="btn btn-danger actionnews" data-bs-toggle="modal" data-bs-target="#delete<?php echo $fetch['ID']?>" data-bs-whatever="@mdo"><span class="glyphicon glyphicon-edit"></span>Delete</button></td>
 
@@ -264,47 +267,63 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 					<div class="col-md-8 updatenews">
           <div class="form-group">
 							<label>Name</label>
-							<input type="text" class="form-control managenewsadd" name="name" required="required"/>
+              <input type="hidden" value="<?php echo $fetch['ID']?>" name="user_id"/>
+							<input type="text" class="form-control managenewsadd" name="name" value="<?php echo $fetch['NAME']?>" required="required"/>
 						</div>
 
 						<div class="form-group">
 							<label>Photo</label>
-							<input type="file"  class="form-control managenewsadd" name="photo" required="required"/>
+							<input type="file"  class="form-control managenewsadd" value="<?php echo $fetch['IMAGE']?>" name="photodelete" />
 						</div>
 						
-						<select class="form-select" name="company" aria-label="Default select example">
+						<select class="form-select" name="company"  aria-label="Default select example">
       <option selected>Company</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+      <option <?php if($fetch['COMPANY']==1){
+        echo 'selected';
+      }?> value="1">One</option>
+      <option <?php if($fetch['COMPANY']==2){
+        echo 'selected';
+      }?> value="2">Two</option>
+      <option <?php if($fetch['COMPANY']==3){
+        echo 'selected';
+      }?> value="3">Three</option>
       </select>
             <div class="form-group">
 							<label>Details</label>
-              <textarea class="form-control managenewsupdate" rows="10" col="30"  name="details" required="required"></textarea>						
+              <textarea class="form-control managenewsupdate" rows="10" col="30"  name="details" required="required"><?php echo $fetch['DETAILS']?></textarea>						
             </div>
 
             <div class="form-group">
 							<label>Quantity</label>
-              <input type="number" name="quantity" class="form-control managenewsadd">
+              <input type="number" name="quantity" value="<?php echo $fetch['QUANTITY']?>" class="form-control managenewsadd">
             </div>
 
             <div class="form-group">
 							<label>Cost</label>
-              <input type="number" name="cost" class="form-control managenewsadd">
+              <input type="number" name="cost" value="<?php echo $fetch['COST']?>" class="form-control managenewsadd">
             </div>
 
             <div class="form-group">
 							<label>Price Retail</label>
-              <input type="number" name="retail" class="form-control managenewsadd">
+              <input type="number" name="retail" value="<?php echo $fetch['PRICE_RETAIL']?>" class="form-control managenewsadd">
             </div>
             <div class="form-group">
 							<label>Price WholeSale</label>
-              <input type="number" name="wholesale" class="form-control managenewsadd">
+              <input type="number" name="wholesale" value="<?php echo $fetch['PRICE_WHOLESALE']?>" class="form-control managenewsadd">
             </div>
             <div class="form-group">
 							<label>Units Per Dozen</label>
-              <input type="number" name="units" class="form-control managenewsadd">
+              <input type="number" name="units" value="<?php echo $fetch['UNITS_PER_DOZEN']?>" class="form-control managenewsadd">
             </div>
+            <select class="form-select" name="type"  aria-label="Default select example">
+      <option selected>Company</option>
+      <option <?php if($fetch['TYPE']=='Face Mask'){
+        echo 'selected';
+      }?> value="Face Mask">Face Mask</option>
+      <option <?php if($fetch['TYPE']=='Gel'){
+        echo 'selected';
+      }?> value="Gel">Gel</option>
+      </select>
 					</div>
 				</div>
 				<br style="clear:both;"/>
@@ -337,47 +356,59 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 						</div>
 						<div class="form-group">
 							<label>Name</label>
-							<input type="text" class="form-control managenewsadd" name="name" required="required"/>
+              <input type="hidden" value="<?php echo $fetch['ID']?>" name="user_id"/>
+							<input type="text" class="form-control managenewsadd" value="<?php echo $fetch['NAME']?>" name="name" required="required"/>
 						</div>
 
-						<div class="form-group">
-							<label>Photo</label>
-							<input type="file"  class="form-control managenewsadd" name="photo" required="required"/>
-						</div>
 						
-						<select class="form-select" name="company" aria-label="Default select example">
+						<select class="form-select" name="company"  aria-label="Default select example">
       <option selected>Company</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+      <option <?php if($fetch['COMPANY']==1){
+        echo 'selected';
+      }?> value="1">One</option>
+      <option <?php if($fetch['COMPANY']==2){
+        echo 'selected';
+      }?> value="2">Two</option>
+      <option <?php if($fetch['COMPANY']==3){
+        echo 'selected';
+      }?> value="3">Three</option>
       </select>
             <div class="form-group">
 							<label>Details</label>
-              <textarea class="form-control managenewsupdate" rows="10" col="30"  name="details" required="required"></textarea>						
+              <textarea class="form-control managenewsupdate" rows="10" col="30"  name="details" required="required">value="<?php echo $fetch['DETAILS']?>"</textarea>						
             </div>
 
             <div class="form-group">
 							<label>Quantity</label>
-              <input type="number" name="quantity" class="form-control managenewsadd">
+              <input type="number" name="quantity" value="<?php echo $fetch['QUANTITY']?>" class="form-control managenewsadd">
             </div>
 
             <div class="form-group">
 							<label>Cost</label>
-              <input type="number" name="cost" class="form-control managenewsadd">
+              <input type="number" name="cost" value="<?php echo $fetch['COST']?>" class="form-control managenewsadd">
             </div>
 
             <div class="form-group">
 							<label>Price Retail</label>
-              <input type="number" name="retail" class="form-control managenewsadd">
+              <input type="number" name="retail" value="<?php echo $fetch['PRICE_RETAIL']?>" class="form-control managenewsadd">
             </div>
             <div class="form-group">
 							<label>Price WholeSale</label>
-              <input type="number" name="wholesale" class="form-control managenewsadd">
+              <input type="number" name="wholesale" value="<?php echo $fetch['PRICE_WHOLESALE']?>" class="form-control managenewsadd">
             </div>
             <div class="form-group">
 							<label>Units Per Dozen</label>
-              <input type="number" name="units" class="form-control managenewsadd">
+              <input type="number" name="units" value="<?php echo $fetch['UNITS_PER_DOZEN']?>" class="form-control managenewsadd">
             </div>
+            <select class="form-select" name="type"  aria-label="Default select example">
+      <option selected>Type</option>
+      <option <?php if($fetch['TYPE']=='Face Mask'){
+        echo 'selected';
+      }?> value="Face Mask">Face Mask</option>
+      <option <?php if($fetch['TYPE']=='Gel'){
+        echo 'selected';
+      }?> value="Gel">Gel</option>
+      </select>
 					</div>
 				</div>
 				<br style="clear:both;"/>
@@ -449,6 +480,11 @@ echo "<li><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&
 							<label>Units Per Dozen</label>
               <input type="number" name="units" class="form-control managenewsadd">
             </div>
+            <select class="form-select" name="type" aria-label="Default select example">
+      <option selected>Type</option>
+      <option value="Face Mask">Face Mask</option>
+      <option value="Gel">Gel</option>
+      </select>
 					</div>
 				</div>
 				<br style="clear:both;"/>

@@ -69,7 +69,73 @@ session_start();
   $regex = "/(?:[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])/";
 
 
+  if(isset($_POST['signup']))
+  {
+$firstname=$_POST['firstname'];
+$lastname=$_POST['lastname'];
+$email=$_POST['email'];
+$password=md5($_POST['password']);
+    if(strlen($_POST['firstname']) == 0 && strlen($_POST['lastname']) == 0 && strlen($_POST['email']) == 0 && strlen($_POST['password']) == 0 && strlen($_POST['ConfirmPassword']) == 0)
+    {
+      echo "<script>
+      alert('fields are Empty please fill in the blanks');
+          </script>";
+    }
+    else if(strlen($_POST['firstname']) == 0 || strlen($_POST['lastname']) == 0 || strlen($_POST['email']) == 0 || strlen($_POST['password']) == 0 || strlen($_POST['ConfirmPassword']) == 0){
+      echo "<script>
+      alert('one or more fields are Empty please fill in the blanks');
+      </script>";
+    }
 
+    else if(!preg_match($regex, $_POST['email'])) {
+      echo "<script>
+      alert('Email is not valid');
+      </script>";
+        }
+        else if( strlen($_POST['password'])<8){
+          echo "<script>
+            alert('password must be 8 or more characters');
+               </script>";
+        }
+    else if($_POST['password']!=$_POST['ConfirmPassword'])
+    {
+      echo "<script>
+        alert('password and Confirm Password did not Match');
+           </script>";
+    }
+    else{
+      
+      $query="select * from users where EMAIL='".$email."'";
+      $result=mysqli_query($connect,$query);
+        if(mysqli_num_rows($result)!=0)
+        {
+          echo"<script>if(!alert('User Already Exists')) document.location = 'index.php';
+            </script>";
+          exit();
+
+        }
+    
+        else{
+          
+mysqli_query($connect, "INSERT INTO `users` VALUES('', '$firstname', '$lastname', '$email' , '$password', '0')") or die(mysqli_error());
+echo "<script>
+alert('User has been added Succesfully');
+alert('Please Wait for the Admin to Approve your Request')
+window.location.href='index.php';
+</script>";
+        
+        
+        }
+    }
+    
+    
+   
+    
+
+
+  
+  }
+  
 
   if (isset($_POST['login'])) {
 
@@ -140,15 +206,6 @@ window.location.href='Login-Signup.php';
           <input type="text" class="login-input" name="lastname" placeholder="LastName" value="<?php if (isset($_POST['lastname'])) {
                                                                                                   echo $_POST['lastname'];
                                                                                                 } ?>">
-          <input type="text" class="login-input" name="jobplace" placeholder="Job Place" value="<?php if (isset($_POST['jobplace'])) {
-                                                                                                  echo $_POST['jobplace'];
-                                                                                                } ?>">
-          <input type="number" class="login-input" name="experience" placeholder="Years of Experience" value="<?php if (isset($_POST['experience'])) {
-                                                                                                                echo $_POST['experience'];
-                                                                                                              } ?>">
-          <input type="text" class="login-input" name="degree" placeholder="Highest Educational Degree" value="<?php if (isset($_POST['degree'])) {
-                                                                                                                  echo $_POST['degree'];
-                                                                                                                } ?>">
           <input type="email" class="login-input" id="email" name="email" placeholder="Email" value="<?php if (isset($_POST['email'])) {
                                                                                                         echo $_POST['email'];
                                                                                                       } ?>">
@@ -163,10 +220,13 @@ window.location.href='Login-Signup.php';
       <div class="form-container sign-in-container">
         <form action="Login-Signup.php" method="post" class="signin_form">
           <h1 class="login-h1">Sign In</h1>
+          
+              
           <input type="email" class="login-input" name="email" placeholder="Email">
           <input type="password" class="login-input" name="password" placeholder="Password">
-          <a href="admin/ForgetPassword.php">Forgot Your Password</a>
           <button type="submit" name="login" class="btn btn-primary">Login</button>
+
+          <a href="admin/ForgetPassword.php">Forgot Your Password</a>
         </form>
       </div>
       <div class="overlay-container">

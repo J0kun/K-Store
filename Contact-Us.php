@@ -85,7 +85,7 @@
                   Manage
                 </a>
                 <ul class="dropdown-menu">
-                    <a class="nav-link fs-5" href="admin/ManageNews.php">News</a>
+                    <a class="nav-link fs-5" href="admin/ManageProducts.php">Products</a>
                     <a class="nav-link fs-5" href="admin/ManageUsers.php">Users</a>
                 </ul>
             </li>

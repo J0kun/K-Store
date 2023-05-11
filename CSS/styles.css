@@ -223,27 +223,30 @@ display: block;
     
     div#logincontainer {
         width: 80vw;
-        height: 110vh;
         margin: 50px auto;
+        height: 90vh;
     }
     
-    .signin_form,.signup_form {
+    .signin_form{
+        margin: 21% 0% 0 18%;
         background-color: #FFFFFF;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        height: 100%;
-        text-align: center;
+        text-align: left;
+    }
+    .signup_form {
+        margin: 12% 0% 0 18%;
+        background-color: #FFFFFF;
+        text-align: left;
     }
     
-    input.login-input {
-        background-color: #eee;
-        border: none;
-        padding: 12px 15px;
-        margin: 8px 0;
-        width: 50%;
-    }
+
+input.login-input {
+    display: block;
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 6% 0;
+    width: 70%;
+}
     
     .big_container {
         background-color: #fff;
@@ -516,9 +519,12 @@ label.col-sm-2.col-form-label {
     color: #11698E;
 }
 button.btn.btn-primary {
+    display: inline-block;
     background-color: #11698e;
     color: #f2f2f2;
     border-color: #11698e;
+    width: 25%;
+    margin-right: 10%;
 }
     /* products */
     

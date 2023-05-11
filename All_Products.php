@@ -40,7 +40,7 @@
             Manage
           </a>
           <ul class="dropdown-menu">
-              <a class="nav-link fs-5" href="ManageProducts.php">News</a>
+              <a class="nav-link fs-5" href="ManageProducts.php">Products</a>
               <a class="nav-link fs-5" href="admin/ManageUsers.php">Users</a>
           </ul>
       </li>

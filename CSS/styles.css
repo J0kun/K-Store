@@ -161,21 +161,66 @@ display: block;
 
 /* about us */
 
-.About_first img{
-   width: 100%;
-   height: 300px;
+.About_first{
+background-color: #FFF5EC;
 }
-
-.About_first h1 {
-    top: 35%;
-    display: block;
-    position: absolute;
-    margin: 0 auto;
-    width: 15%;
+.About_first img {
+    margin-left: 10%;
+    display: inline-block;
+}
+.About_left {
+    display: inline-block;
+    position: relative;
+    top: 100px;
+    width: 40%;
+}
+.About_right {
+    display: inline-block;
+    width: 50%;
+}
+.About_right h1 {
+   color: #73DDC2;
+   direction: rtl;
+}
+.About_right p {
     color: #008993;
-    left: 45%;
-}
+    direction: rtl;
+ }
+.About_right p,.About_second p {
+    direction: rtl;
+ }
 
+ .About_second {
+    margin: 30% 10%;
+    opacity: 0;
+}
+.About_second_right img {
+    display: block;
+    width: 100%;
+}
+.About_second_right {
+    display: inline-block;
+    width: 34%;
+}
+.About_second_left {
+    display: inline-block;
+    width: 64%;
+}
+.About_second .row .col-lg-4:nth-child(even){
+    background-color: #4FB6B8;
+    color: white;
+}
+.About_second .row .col-lg-4:nth-child(odd){
+    background-color: #FAF4F4;
+    color: #008993;
+
+}
+.About_second .row .col-lg-4 h1{
+    text-align: center;
+}
+.About_second .row .col-lg-4{
+    padding: 4% 2% 0 1%;
+}
 
     /* login page */
     signup-h1,login-h1,hello,welcome-back

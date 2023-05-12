@@ -1,3 +1,5 @@
+import ScrollTrigger from '@terwanerik/scrolltrigger'
+
 window.addEventListener('scroll',reveal);
     function reveal()
     {
@@ -17,3 +19,8 @@ window.addEventListener('scroll',reveal);
       }
     }
     }
+
+
+
+
+    // test

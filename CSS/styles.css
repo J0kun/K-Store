@@ -626,28 +626,35 @@ button.btn.btn-primary {
     width: 20%;
     background-color: #fAf4f4;
 }
+
 /* responsive */
 
 /* // Small devices (landscape phones, 576px and up) */
 @media (max-width: 768px) { 
     img#banner{
-        height: 80%;
+        height: 95%;
     }
     .first_container_heading{
         font-size: 170%;
     }
     .first-container {
-        height: 40vh;
+        height: 30vh;
         display: flex;
 }
+    
+
 }
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     img#banner{
        
-        height: 65%;
+        height: 95%;
     }
+    .first-container {
+        height: 50vh;
+        display: flex;
+}
    
 }
        
@@ -674,3 +681,4 @@ button.btn.btn-primary {
         font-size: 370%;
     }
 }
+
